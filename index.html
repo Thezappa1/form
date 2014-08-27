@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+  <head>
+    <title>AngularJS Form</title>
+    <script type="text/javascript" src="http://code.angularjs.org/1.1.4/angular.min.js"></script>
+    <script type="text/javascript" src="js/modules/promise-tracker.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  </head>
+  <body class="container">
+  
+  <h2>AngularJs form</h2>
+
+  <p>This is an AngularJs based form. It uses a controller to handle form validation and submission.</p>
+ 
+
+  <div data-ng-controller="help">
+    <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+    <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+    <form name="helpForm" novalidate role="form">
+      <div class="form-group">
+        <label for="firstname">First Name </label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.firstname.$error.required">Required!</span>
+        <input type="text" name="firstname" data-ng-model="firstname" class="form-control" required />
+      </div>
+	  
+	   <div class="form-group">
+        <label for="lastname">Last Name </label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.lastname.$error.required">Required!</span>
+        <input type="text" name="lastname" data-ng-model="lastname" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your E-mail address</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
+        <input type="email" name="email" data-ng-model="email" class="form-control" required />  
+      </div>
+	  
+	  <div class="form-group">
+        <label for="confirmemail">Confirm E-mail address</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.confirmemail.$error.required">Required!</span>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.$error.confirmemail">Invalid email!</span>
+        <input type="email" name="confirmemail" data-ng-model="confirmemail" class="form-control" required />  
+      </div>
+
+	   <div class="form-group">
+        <label for="location">Location</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.location.$error.required">Required!</span>
+        <select name="location" data-ng-model="location" data-ng-options="id as value for (id, value) in locationOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+      <!--
+	  <div class="form-group">
+        <label for="subjectList">What is the nature of your request?</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
+        <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  -->
+	  
+	  <div class="form-group">
+        <label for="address">Address</label>
+        <textarea type="text" name="address" data-ng-model="address" class="form-control" ></textarea>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="location">Location</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.location.$error.required">Required!</span>
+        <select name="location" data-ng-model="location" data-ng-options="id as value for (id, value) in locationOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+	  <p>Grind Information</p>
+	  
+	  <div class="form-group">
+        <label for="stage">Stage</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.stage.$error.required">Required!</span>
+        <select name="stage" data-ng-model="stage" data-ng-options="id as value for (id, value) in stageOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="level">Level</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.level.$error.required">Required!</span>
+        <select name="level" data-ng-model="level" data-ng-options="id as value for (id, value) in levelOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+	  <div class="form-group">
+        <label ng-repeat="subject in subjects">Subjects
+        <span class="label label-danger" data-ng-show="submitted && helpForm.leaving.$error.required">Required!</span>
+          <input type="checkbox" checklist-model="user.subjects" checklist-value="subjects" />
+		  </label>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="school">School </label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.school.$error.required">Required!</span>
+        <input type="text" name="school" data-ng-model="school" class="form-control" required />
+      </div>
+	  
+	  <div class="form-group">
+        <label for="startday">Start day</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.startday.$error.required">Required!</span>
+        <select name="startday" data-ng-model="startday" data-ng-options="id as value for (id, value) in startdayOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="starttime">Start time</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.starttime.$error.required">Required!</span>
+        <select name="starttime" data-ng-model="starttime" data-ng-options="id as value for (id, value) in starttimeOptions" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="freq">Grind frequency</label>
+        <span class="label label-danger" data-ng-show="submitted && helpForm.freq.$error.required">Required!</span>
+        <select name="freq" data-ng-model="freq" data-ng-options="id as value for (id, value) in freqOptions | orderBy:'value'" class="form-control" required>
+          <option value=""></option>
+        </select>
+      </div>
+
+
+      <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+  </body>
+</html>
